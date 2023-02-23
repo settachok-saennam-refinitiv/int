@@ -1,0 +1,503 @@
+{
+    "Version": {
+        "Major": null,
+        "Minor": null,
+        "Build": null,
+        "Revision": 0
+    },
+    "CreatedBy": null,
+    "Metadata": {
+        "Description": {
+            "DisplayName": "Collaboration Platform"
+        }
+    },
+    "AppService": {
+        "asset_insight_id": "250373",
+        "tr_financial_identifier": "225401002",
+        "owner_email": "clp-devops@refinitiv.com",
+        "container_insights": true,
+        "compute": {
+            "functions": [
+                {
+                    "name": "chatroomSync",
+                    "runtime": "JAVA11",
+                    "memory_size": "512",
+                    "source": "lambda-java-0.33.0.zip",
+                    "handler": "com.refinitiv.collab.platform.lambda.ChatroomSync::handleRequest",
+                    "version": "0.33.0",
+                    "env_vars": {
+                        "common": {
+                            "CLPENV": "_clpenv",
+                            "RESOURCE_APP_NAME": "_clpenv"
+                        }
+                    }
+                },
+                {
+                    "name": "manifestSync",
+                    "runtime": "JAVA11",
+                    "memory_size": "512",
+                    "source": "lambda-java-0.33.0.zip",
+                    "handler": "com.refinitiv.collab.platform.lambda.BotManifestSync::handleRequest",
+                    "version": "0.33.0",
+                    "env_vars": {
+                        "common": {
+                            "CLPENV": "_clpenv",
+                            "RESOURCE_APP_NAME": "_clpenv"
+                        }
+                    }
+                },
+                {
+                    "name": "deskSync",
+                    "runtime": "JAVA11",
+                    "memory_size": "512",
+                    "source": "lambda-java-0.33.0.zip",
+                    "handler": "com.refinitiv.collab.platform.lambda.DeskSync::handleRequest",
+                    "version": "0.33.0",
+                    "env_vars": {
+                        "common": {
+                            "CLPENV": "_clpenv",
+                            "RESOURCE_APP_NAME": "_clpenv"
+                        }
+                    }
+                }
+            ],
+            "containers": [
+                {
+                    "name": "search",
+                    "build_tag": "0.35.2",
+                    "source": {
+                        "golden_image": "Java11",
+                        "source_path": "search.zip",
+                        "entry_point": "-XX:+HeapDumpOnOutOfMemoryError -Xms4096m -Xmx4096m -jar search.jar"
+                    },
+                    "env_vars": {
+                        "common": {
+                            "CLPENV": "_clpenv",
+                            "ELASTICSEARCH_INDEX_NAME_DESKS": "desks",
+                            "ELASTICSEARCH_INDEX_NAME_CHATROOMS": "chatrooms",
+                            "ELASTICSEARCH_INDEX_NAME_MESSAGES": "messages",
+                            "ELASTICSEARCH_INDEX_NAME_MANIFEST": "manifest"
+                        }
+                    }
+                }
+            ]
+        },
+        "resources": {
+            "trusted_applications": {},
+            "elasticache": [
+                {
+                    "name": "userdetail",
+                    "auth_disabled": true
+                },
+                {
+                    "name": "userkeys",
+                    "auth_disabled": true
+                },
+                {
+                    "name": "chatroomkeys",
+                    "auth_disabled": true
+                },
+                {
+                    "name": "chatroommembers",
+                    "auth_disabled": true
+                },
+                {
+                    "name": "botmanifests",
+                    "auth_disabled": true
+                }
+            ],
+            "opensearch": [
+                {
+                    "name": "desks-os",
+                    "version": "OpenSearch_1.2"
+                },
+                {
+                    "name": "rooms-os",
+                    "version": "OpenSearch_1.2"
+                },
+                {
+                    "name": "messages-os",
+                    "version": "OpenSearch_1.2"
+                },
+                {
+                    "name": "manifests-os",
+                    "version": "OpenSearch_1.2"
+                }
+            ],
+            "dynamodb": [
+                {
+                    "table_name": "chatrooms",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S",
+                    "global_indexes": [
+                        {
+                            "name": "gsi",
+                            "hash_key": "gsi_pk",
+                            "range_key": "gsi_sk",
+                            "projection_type": "ALL"
+                        },
+                        {
+                            "name": "mcr_rooms_domain_gsi",
+                            "hash_key": "room_domain",
+                            "range_key": "create_at",
+                            "projection_type": "ALL"
+                        },
+                        {
+                            "name": "mcr_granted_gsi",
+                            "hash_key": "granted_member_domain",
+                            "range_key": "mcr_gsi_granted",
+                            "projection_type": "ALL"
+                        }
+                    ,
+                        {
+                            "name": "cro_members_gsi",
+                            "hash_key": "cro_user_domain",
+                            "range_key": "sk",
+                            "projection_type": "ALL"
+                        }
+                    ],
+                    "ttl": {
+                        "enabled": true,
+                        "attribute_name": "expire_date"
+                    },
+                    "lambda_triggers": [
+                        {
+                            "function_name": "::chatroomSync:0.33.0"
+                        }
+                    ]
+                },
+                {
+                    "table_name": "clp-usertypes",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "global_indexes": [
+                        {
+                            "name": "GetManifestUsers",
+                            "hash_key": "manifestKey",
+                            "projection_type": "INCLUDE",
+                            "non_key_attributes": [
+                                "pk",
+                                "createdAtS"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "table_name": "clp-usersettings",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S"
+                },
+                {
+                    "table_name": "user-settings",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S"
+                },
+                {
+                    "table_name": "clp-userdetail",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S",
+                    "ttl": {
+                        "enabled": true,
+                        "attribute_name": "ttl"
+                    },
+                    "lambda_triggers": [
+                        {
+                            "function_name": "lambda:0.36.3:userDetailCache:"
+                        }
+                    ]
+                },
+                {
+                    "table_name": "notification-session",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S",
+                    "global_indexes": [
+                        {
+                            "name": "ByTargetUser",
+                            "hash_key": "sk",
+                            "range_key": "gsi_sk",
+                            "projection_type": "ALL"
+                        },
+                        {
+                            "name": "ByChatRoom",
+                            "hash_key": "chat_room_id",
+                            "range_key": "status",
+                            "projection_type": "ALL"
+                        },
+                        {
+                            "name": "BySendUser",
+                            "hash_key": "create_by",
+                            "range_key": "gsi_sk",
+                            "projection_type": "ALL"
+                        }
+                    ],
+                    "ttl": {
+                        "enabled": true,
+                        "attribute_name": "expire_date"
+                    }
+                },
+                {
+                    "table_name": "service-state",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S"
+                },
+                {
+                    "table_name": "keys",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S",
+                    "global_indexes": [
+                        {
+                            "name": "gsi",
+                            "hash_key": "latest_key",
+                            "range_key": "create_at_n",
+                            "projection_type": "ALL"
+                        }
+                    ],
+                    "lambda_triggers": [
+                        {
+                            "function_name": "lambda:0.36.3:keysSync:"
+                        }
+                    ],
+                    "ttl": {
+                        "enabled": true,
+                        "attribute_name": "expire_date"
+                    }
+                },
+                {
+                    "table_name": "desks",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "lambda_triggers": [
+                        {
+                            "function_name": "::deskSync:0.33.0"
+                        }
+                    ],
+                    "ttl": {
+                        "enabled": true,
+                        "attribute_name": "expire_date"
+                    }
+                },
+                {
+                    "table_name": "control-events",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S",
+                    "global_indexes": [
+                        {
+                            "name": "ByType",
+                            "hash_key": "pk",
+                            "range_key": "event_type",
+                            "projection_type": "ALL"
+                        }
+                    ],
+                    "ttl": {
+                        "enabled": true,
+                        "attribute_name": "expire_date"
+                    }
+                },
+                {
+                    "table_name": "contact-list",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S",
+                    "global_indexes": [
+                        {
+                            "name": "gsi",
+                            "hash_key": "pk",
+                            "range_key": "item_key",
+                            "projection_type": "ALL"
+                        },
+                        {
+                            "name": "ItemInFolder",
+                            "hash_key": "item_key",
+                            "range_key": "folder",
+                            "projection_type": "ALL"
+                        }
+                    ]
+                },
+                {
+                    "table_name": "bot-manifests",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S",
+                    "global_indexes": [
+                        {
+                            "name": "SearchDateRage",
+                            "hash_key": "pk",
+                            "range_key": "active_end_date_n",
+                            "projection_type": "INCLUDE",
+                            "non_key_attributes": [
+                                "active_start_date_n",
+                                "manifest_doc_id",
+                                "messenger_uuid",
+                                "active_start_date_s",
+                                "active_end_date_s",
+                                "create_at",
+                                "update_by"
+                            ]
+                        },
+                        {
+                            "name": "KeyRelations",
+                            "hash_key": "manifest_key",
+                            "range_key": "sk",
+                            "projection_type": "ALL"
+                        },
+                        {
+                            "name": "MessengerUuid_Manifest",
+                            "hash_key": "messenger_uuid",
+                            "range_key": "gsi_messenger_uuid_manifest_sk",
+                            "projection_type": "ALL"
+                        },
+                        {
+                            "name": "Active",
+                            "hash_key": "gsi_active_pk",
+                            "range_key": "active_manifest",
+                            "projection_type": "ALL"
+                        }
+                    ],
+                    "lambda_triggers": [
+                        {
+                            "function_name": "::manifestSync:0.33.0"
+                        }
+                    ]
+                },
+                {
+                    "table_name": "blasts",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S",
+                    "global_indexes": [
+                        {
+                            "name": "ByBlastCreator",
+                            "hash_key": "creator",
+                            "range_key": "pk",
+                            "projection_type": "ALL"
+                        },
+                        {
+                            "name": "ByCreatorAndName",
+                            "hash_key": "creator",
+                            "range_key": "blast_name",
+                            "projection_type": "ALL"
+                        }
+                    ]
+                },
+                {
+                    "table_name": "dsl",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "global_indexes": [
+                        {
+                            "name": "by_user",
+                            "hash_key": "messenger_uuid",
+                            "range_key": "pk",
+                            "projection_type": "ALL"
+                        }
+                    ]
+                },
+                {
+                    "table_name": "user-presence",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S",
+                    "global_indexes": [
+                        {
+                            "name": "Latest_index",
+                            "hash_key": "sk",
+                            "range_key": "pk",
+                            "projection_type": "ALL"
+                        }
+                    ]
+                },
+                {
+                    "table_name": "useruuid",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "global_indexes": [
+                        {
+                            "name": "sk-index",
+                            "hash_key": "sk",
+                            "projection_type": "ALL"
+                        }
+                    ]
+                },
+                {
+                    "table_name": "desk-presence",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S",
+                    "global_indexes": [
+                        {
+                            "name": "ByListener",
+                            "hash_key": "sk",
+                            "range_key": "pk",
+                            "projection_type": "ALL"
+                        }
+                    ]
+                },
+                {
+                    "table_name": "presence-track",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S",
+                    "global_indexes": [
+                        {
+                            "name": "ByStatus",
+                            "hash_key": "status",
+                            "range_key": "latest",
+                            "projection_type": "ALL"
+                        }
+                    ],
+                    "ttl": {
+                        "enabled": true,
+                        "attribute_name": "ttl"
+                    },
+                    "lambda_triggers": [
+                        {
+                            "function_name": "lambda-presence:0.9.0:bot-proc:"
+                        }
+                    ]
+                },
+                {
+                    "table_name": "configs",
+                    "hash_key_name": "pk",
+                    "hash_key_type": "S",
+                    "range_key_name": "sk",
+                    "range_key_type": "S"
+                }
+            ],
+            "s3": [
+                {
+                    "bucket_name": "bot-manifests",
+                    "versioning_enabled": true,
+                    "replication_enabled": true
+                },
+                {
+                    "bucket_name": "archive"
+                }
+            ]
+        },
+        "notification_emails": [
+            "clp-devops@refinitiv.com"
+        ]
+    }
+}

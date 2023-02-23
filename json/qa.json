@@ -1,0 +1,25 @@
+{
+    "s3": [
+        {
+            "bucket_name": "bot-manifests",
+            "versioning_enabled": true,
+            "replication_enabled": true
+        },
+        {
+            "bucket_name": "archive"
+        }
+    ],
+    "external_security_groups": {
+        "ppe": {
+            "eu-west-1": [
+                "sg-002d5ce76823c48dc"
+            ],
+            "us-east-1": [
+                "sg-0a1985ae1ab72c662"
+            ],
+            "ap-southeast-1": [
+                "sg-06032fffdc9f3bd5a"
+            ]
+        }
+    }
+}

@@ -1,0 +1,86 @@
+Running cas-cli v1.45.0
+Checking Node version compatibility... Done
+Checking deprecation status... Done
+Checking for available updates... Done
+ ›   Warning: There is a newer version containing some additional features. We recommend downloading it in order to be able to use them!
+Trying to Authenticate... Done
+Trying to retrieve the UUID... Done (PAXTRA82695)
+Retrieving application metadata... Done
+Fetching Versions... Done
+   N                             │   index
+   Version                       │   Version
+   Created By                    │   CreatedByDisplay
+   Deploy Status                 │   DeployStatus
+   Release Status                │   ReleaseStatus
+   VersionMdsId                  │   VersionMdsId
+   Is signed                     │   IsSigned
+   Deactivated                   │   IsDeactivated
+
+    Table: Version Table for application with moniker rwm-proxy
+┌──┬────────┬─────────────────────────────────────────┬───────────────────┬──────────────┬────────────────────────────────────┬─────────────┬───────────┐
+│N │Version │Created By                               │Deploy Status      │Release Status│VersionMdsId                        │Is signed    │Deactivated│
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│1 │1.1.0.3 │Settachok Saennam                        │ACTIVE             │Internal (All)│7b2d9afa-d8b7-401d-b781-ed608a4232cb│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│2 │1.1.0.2 │Settachok Saennam                        │DECOMMISSION_FAILED│New App       │4a03f8b3-8b11-4654-a126-99cc0d3dd3b5│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│3 │1.1.0.1 │Settachok Saennam                        │DECOMMISSIONED     │Inactive      │2af1c64c-07ef-459e-91ec-d58e1305d798│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│4 │1.0.5.30│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │f36ac407-9672-4fe8-ac5b-605bea855969│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│5 │1.0.5.29│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │7255615c-9212-4a6f-a365-ab41fcc3c344│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│6 │1.0.5.28│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │d0271cd6-8209-4d19-a5b0-69a7da2b0790│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│7 │1.0.5.27│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │910064a4-10e3-47c8-9df4-ad9f33a5bb7a│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│8 │1.0.5.25│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │b70a44a0-3e90-4d7d-92c3-8bc7f67c925c│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│9 │1.0.4.22│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │fb8565f6-09ab-4ad5-b130-1945e58315ae│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│10│1.0.4.21│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │56e0170c-6e2d-4398-b992-8529388951d0│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│11│1.0.4.20│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │1df24751-ea4f-42fa-9c60-bc6860173016│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│12│1.0.4.19│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │0e1340c0-222a-407b-b218-8f8f62eeb7ba│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│13│1.0.4.16│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │79a5e6e6-328a-4871-8851-eff1ec99190b│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│14│1.0.3.13│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │3f732257-d5f6-4f76-bf19-4bf67deef2c9│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│15│1.0.0.40│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │09a02265-d2b8-49f7-be45-be23221f89fa│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│16│1.0.0.39│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │699ad330-188b-4537-940b-8eca24bb035e│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│17│1.0.0.37│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │aa8eb8c2-7b2c-4018-92c8-22560e37dd9d│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│18│1.0.0.33│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │d0c61a14-ca3f-44dd-be3c-bea7e02a883d│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│19│1.0.0.32│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │a16eebd0-e836-455d-9eac-91d701c5bd04│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│20│1.0.0.31│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │00eb6779-2973-4ceb-a110-5cdb2832a97a│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│21│1.0.0.30│Settachok Saennam                        │DECOMMISSIONED     │Inactive      │aa3166f9-1717-442b-a979-2884a3591ee5│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│22│1.0.0.29│Settachok Saennam                        │PUB_FAILED         │Inactive      │0f8dce52-241d-4b0a-b0c0-f62053441e65│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│23│1.0.0.23│Settachok Saennam                        │PUB_FAILED         │Inactive      │6debb3cf-a2de-457f-9ebb-678352726d5a│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│24│1.0.0.17│Settachok Saennam                        │PUB_FAILED         │Inactive      │22514cfc-3826-462f-92e4-fb532a476953│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│25│1.0.0.16│Settachok Saennam                        │PUB_FAILED         │Inactive      │bdbdca33-7ba6-4e48-bcd1-da3a76cd287d│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│26│1.0.0.14│Settachok Saennam                        │PUB_FAILED         │Inactive      │7a0b8746-3f2e-4b06-a762-b2eeb0ea4249│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│27│1.0.0.2 │Pichest Wongsiripiphat                   │DECOMMISSIONED     │Inactive      │f0c5a8e7-3a48-461c-929a-c6486cac9544│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│28│1.0.0.1 │Pichest Wongsiripiphat                   │DECOMMISSIONED     │Inactive      │aa6ac4c7-89f3-4b57-8c46-013b75d848ce│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│29│1.0.0.0 │Pichest Wongsiripiphat                   │DECOMMISSIONED     │Inactive      │6b7eeed3-ec2a-47b2-9d5e-5346722bc359│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│30│0.0.1.36│RW Mobile machine account for precaching │DECOMMISSIONED     │Inactive      │f7984cb6-91dd-49c1-97ab-11a0322e98c5│Not Available│false      │
+├──┼────────┼─────────────────────────────────────────┼───────────────────┼──────────────┼────────────────────────────────────┼─────────────┼───────────┤
+│31│0.0.1.11│Settachok Saennam                        │PUB_FAILED         │Inactive      │491b8da7-3b2f-456f-a187-4da453af3039│Not Available│false      │
+├──┴────────┴─────────────────────────────────────────┴───────────────────┴──────────────┴────────────────────────────────────┴─────────────┴───────────┤
+│   Fetched at: 1:02:53 PM                                                                                                                              │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
